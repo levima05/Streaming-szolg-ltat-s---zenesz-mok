@@ -1,9 +1,7 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
 import { SongsService } from './songs.service';
 import { CreateSongDto } from './dto/create-song.dto';
 import { UpdateSongDto } from './dto/update-song.dto';
-import { query } from 'express';
-import { count } from 'console';
 
 @Controller('songs')
 export class SongsController {
@@ -35,8 +33,8 @@ export class SongsController {
   }
 
 
-  @Get('songs/free')
-  findZero(@Param('id') id: string) {
-    return this.songsService.findZero(+id);
+  @Get(':free')
+  findZero() {
+    return this.songsService.findZero();
   }
 }
