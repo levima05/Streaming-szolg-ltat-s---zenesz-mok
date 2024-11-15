@@ -33,7 +33,7 @@ export class SongsController {
   }
 
 
-  @Get(':free')
+  @Get('free')
   findZero() {
     return this.songsService.findZero();
   }

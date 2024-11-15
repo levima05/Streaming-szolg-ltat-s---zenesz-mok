@@ -45,9 +45,9 @@ export class SongsService {
     }
   }
 
-  async findZero(id: number){
+  async findZero(){
     const updateFindZero = await this.db.song.findMany({
-      where: { id : id, price : 0},
+      where: {price : 0},
     })
     return updateFindZero;
   }
