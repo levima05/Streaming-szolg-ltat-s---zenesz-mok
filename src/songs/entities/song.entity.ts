@@ -4,4 +4,5 @@ export class Song {
   author: string
   duration: number
   price: number 
+  popularity: number
 }

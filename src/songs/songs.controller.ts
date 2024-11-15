@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { SongsService } from './songs.service';
 import { CreateSongDto } from './dto/create-song.dto';
 import { UpdateSongDto } from './dto/update-song.dto';
@@ -37,4 +37,12 @@ export class SongsController {
   findZero() {
     return this.songsService.findZero();
   }
+
+  @Get('top')
+  async findTop(@Query('count') count: string) {
+    const countValue = count ? parseInt(count, 10) : 10;
+    return this.songsService.findTop(countValue);
+  }
 }
+
+

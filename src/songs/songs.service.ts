@@ -51,4 +51,14 @@ export class SongsService {
     })
     return updateFindZero;
   }
+
+  async findTop(count: number = 10) {
+    const updateFindTop = await this.db.song.findMany({
+      orderBy: {
+        popularity: 'desc',  
+      },
+      take: count,
+    });
+    return updateFindTop;
+  }
 }

@@ -13,4 +13,7 @@ export class CreateSongDto {
   @IsNotEmpty()
   @IsInt()
   price: number 
+  @IsInt()
+  @IsNotEmpty()
+  popularity: number
 }
