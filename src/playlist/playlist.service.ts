@@ -1,26 +1,45 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePlaylistDto } from './dto/create-playlist.dto';
 import { UpdatePlaylistDto } from './dto/update-playlist.dto';
+import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
 export class PlaylistService {
-  create(createPlaylistDto: CreatePlaylistDto) {
-    return 'This action adds a new playlist';
+  db: PrismaService;
+  constructor(db: PrismaService) {
+    this.db = db;
   }
-
+  async create( createSongDto: CreatePlaylistDto) {
+    return await this.db.song.create({
+      data: createSongDto
+    });
+  }
   findAll() {
-    return `This action returns all playlist`;
+    return this.db.song.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} playlist`;
+  async findOne(id: number) {
+    return this.db.song.findUnique({
+      where: { id },
+    });
   }
 
-  update(id: number, updatePlaylistDto: UpdatePlaylistDto) {
-    return `This action updates a #${id} playlist`;
+  async update(id: number, updateSongDto: UpdatePlaylistDto) {
+    const updatedSong = await this.db.song.update({
+      where: { id },
+      data: updateSongDto,
+    });
+    return updatedSong;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} playlist`;
+  async remove(id: number) {
+    try {
+      await this.db.song.delete({
+        where: { id },
+      });
+    }
+    catch {
+      return undefined;
+    }
   }
 }
