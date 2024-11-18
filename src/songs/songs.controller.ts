@@ -12,7 +12,7 @@ export class SongsController {
     return this.songsService.create(createSongDto);
   }
 
-  @Get()
+  /* @Get()
   findAll() {
     return this.songsService.findAll();
   }
@@ -30,7 +30,7 @@ export class SongsController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.songsService.remove(+id);
-  }
+  } */
 
 
   @Get('free')
@@ -42,6 +42,11 @@ export class SongsController {
   async findTop(@Query('count') count: string) {
     const countValue = count ? parseInt(count, 10) : 10;
     return this.songsService.findTop(countValue);
+  }
+
+  @Get('popularArtist')
+  async getPopularArtist(){
+    return this.songsService.getPopularArtist();
   }
 }
 

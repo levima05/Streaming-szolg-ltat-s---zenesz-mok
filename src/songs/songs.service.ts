@@ -61,4 +61,23 @@ export class SongsService {
     });
     return updateFindTop;
   }
+
+  async getPopularArtist() {
+    const popularArtists = await this.db.song.groupBy({
+      by: ['author'],
+      _count: {
+        author: true,
+      },
+      orderBy: {
+        _count: {
+          author: 'desc',
+        },
+      },
+    });
+    
+    return popularArtists.map(item => ({
+      artist: item.author,
+      numberOfSongs: item._count.author,
+    }));
+  }
 }

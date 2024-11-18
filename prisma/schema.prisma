@@ -14,4 +14,12 @@ model song {
   duration   Int
   price      Int
   popularity Int
+  playlists  playlist[] @relation("SongPlaylists")
 }
+
+model playlist {
+  id         Int    @id @default(autoincrement())
+  name       String
+  songs      song[] @relation("SongPlaylists")
+}
+
